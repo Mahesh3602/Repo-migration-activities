@@ -53,3 +53,10 @@ Output: This creates a file named mannequins_Demo-org-cust1.csv in your current 
 * Locate the target user column (usually labeled GitHub User or target-user).
 * Manually map each Azure DevOps identity by typing the exact target GitHub handle of the user who should inherit that history.
 * Save and close the file.
+
+### Step 4: Reclaim the Mannequins
+Run the script with the Reclaim action. This reads your modified CSV file and sends reclamation invitations to the mapped GitHub users.
+
+```powershell
+pwsh ./Manage-Mannequins.ps1 -Action Reclaim -GitHubOrg $env:GH_ORG -Pat $env:GH_PAT
+```
