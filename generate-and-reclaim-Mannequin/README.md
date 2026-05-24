@@ -60,3 +60,10 @@ Run the script with the Reclaim action. This reads your modified CSV file and se
 ```powershell
 pwsh ./Manage-Mannequins.ps1 -Action Reclaim -GitHubOrg $env:GH_ORG -Pat $env:GH_PAT
 ```
+
+# 💡 Notes & Troubleshooting
+* Extension Auto-Installation: The script will automatically attempt to download and install the gh-ado2gh extension if it is missing from your local GitHub CLI environment.
+* Processing Chunks: The underlying GitHub Migration API processes the entire CSV file input. If you need to map users in batches, simply split your main CSV into smaller files and use the optional -CsvPath parameter to process them sequentially:
+  ```poweshell
+  pwsh ./Manage-Mannequins.ps1 -Action Reclaim -GitHubOrg "Demo-org-cust1" -Pat $env:GH_PAT -CsvPath "./batch1.csv"
+  ```
