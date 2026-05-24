@@ -3,10 +3,10 @@
     Manages GitHub Enterprise Importer mannequin generation and reclamation.
 .EXAMPLE
     # Step 1: Generate the CSV mapping file
-    .\Manage-Mannequins.ps1 -Action Generate -GitHubOrg "Demo-org-cust1" -Pat $env:GH_PAT
+    .\Manage-Mannequins.ps1 -Action Generate -GitHubOrg "$env:GH-ORG" -Pat $env:GH_PAT
 
     # Step 2: (After editing the CSV) Reclaim the identities
-    .\Manage-Mannequins.ps1 -Action Reclaim -GitHubOrg "Demo-org-cust1" -Pat $env:GH_PAT
+    .\Manage-Mannequins.ps1 -Action Reclaim -GitHubOrg "$env:GH-ORG" -Pat $env:GH_PAT
 #>
 [CmdletBinding()]
 param (
