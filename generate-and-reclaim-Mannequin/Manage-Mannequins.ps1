@@ -39,13 +39,21 @@ if (-not (Get-Command gh -ErrorAction SilentlyContinue)) {
     exit 1
 }
 
-# Verify or install the extension
-$extensions = gh extension list
-if ($extensions -notmatch "ado2gh") {
+# Verify or install the extension safely
+Write-Host "Checking for gh-ado2gh extension..."
+$extensionCheck = gh extension list 2>&1
+if ($extensionCheck -notmatch "ado2gh") {
     Write-Host "⚠️ 'ado2gh' extension not detected. Attempting to install..." -ForegroundColor Yellow
+    # Explicitly using cmd / bash wrapper safety depending on environment
     gh extension install github/gh-ado2gh
+    
+    # Double check if it installed successfully
+    $doubleCheck = gh extension list 2>&1
+    if ($doubleCheck -notmatch "ado2gh") {
+        Write-Error "Could not install 'gh-ado2gh' extension automatically. Please run 'gh extension install github/gh-ado2gh' manually."
+        exit 1
+    }
 }
-
 # 3. Execution Logic
 switch ($Action) {
     'Generate' {
